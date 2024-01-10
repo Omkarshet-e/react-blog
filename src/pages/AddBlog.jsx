@@ -5,9 +5,10 @@ import BlogData from "../components/New Blog/BlogData";
 function AddBlog() {
   const [imageFileData, setImageFileData] = useState(null);
 
-  // useEffect(() =>
-  //   console.log(imageFileData);
-  // }, [imageFileData]);
+  useEffect(() => {
+    document.title = "New Blog";
+    return () => (document.title = "React Blog");
+  }, []);
 
   return (
     <div className="w-full  bg-[#ff758f] min-h-[30vw] pt-8 pb-4 ">
