@@ -49,7 +49,7 @@ function Signup() {
           <div className="logo mx-auto">
             <img
               className="w-32 max-sm:w-20 max-sm:mb-3 mx-auto mb-8"
-              src="/public/assets/react-logo-dark.png"
+              src="/assets/react-logo-dark.png"
               alt="App Logo"
             />
           </div>
