@@ -11,7 +11,7 @@ import store from "./state/store.js";
 import App from "./App.jsx";
 import Homepage from "./pages/Homepage.jsx";
 import Logout from "./pages/Logout.jsx";
-import Blogs from "./pages/Blogs.jsx";
+import AllBlogs from "./pages/AllBlogs.jsx";
 import AddBlog from "./pages/AddBlog.jsx";
 import AuthLayout from "./pages/AuthLayout.jsx";
 
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         path: "blogs",
         element: (
           <AuthLayout>
-            <Blogs />
+            <AllBlogs />
           </AuthLayout>
         ),
       },
