@@ -14,6 +14,7 @@ import Logout from "./pages/Logout.jsx";
 import AllBlogs from "./pages/AllBlogs.jsx";
 import AddBlog from "./pages/AddBlog.jsx";
 import AuthLayout from "./pages/AuthLayout.jsx";
+import BlogPost from "./pages/BlogPost.jsx";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,14 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout>
             <AllBlogs />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "blog/:id",
+        element: (
+          <AuthLayout>
+            <BlogPost />
           </AuthLayout>
         ),
       },

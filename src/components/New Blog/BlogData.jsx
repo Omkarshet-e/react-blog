@@ -19,6 +19,7 @@ function BlogData({ imageFileData }) {
     } else {
       console.log(imageFileData);
       console.log("Error");
+      //todo upload image alert
     }
   }
 

@@ -5,7 +5,7 @@ function BlogCard({ content }) {
   const navigate = useNavigate();
   return (
     <div
-      onClick={() => navigate("blog")}
+      onClick={() => navigate("/blog/some-blog")}
       className="  py-3 px-2 bg-dark-primary-black max-sm:aspect-[10/10] aspect-[10/12] rounded-lg ease-in-out duration-200  flex flex-col justify-between gap-5"
     >
       <div>
