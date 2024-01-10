@@ -6,7 +6,7 @@ function AddBlog() {
   const [imageFileData, setImageFileData] = useState(null);
 
   useEffect(() => {
-    document.title = "New Blog";
+    document.title = "Add a Blog";
     return () => (document.title = "React Blog");
   }, []);
 
