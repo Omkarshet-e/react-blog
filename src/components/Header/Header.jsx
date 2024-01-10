@@ -6,7 +6,7 @@ function Header() {
   const [authStatus, setAuthStatus] = useState(false);
 
   function handleToggleOpen() {
-    setOpen(!open);
+    setOpen((open) => !open);
   }
   const navItems = [
     {
