@@ -61,10 +61,12 @@ function ImageUpload({ setImageFileData }) {
       </div>
       <form id="form">
         <input
-          className={` rounded-full bg-dark-variant-gray flex flex-col    text-sm text-white text-ellipsis overflow-hidden pr-5
-            file:mr-5 file:py-2 file:px-6 
+          className={` rounded-full bg-dark-variant-gray max-w-64 sm:max-w-full
+          text-sm max-sm:text-xs text-white text-ellipsis overflow-hidden pr-5 max-sm:pr-1 max-sm:file:pr-1 
+          
+            file:mr-5 max-sm:file:mr-2 file:py-2 max-sm:file:py-1 file:px-6 max-sm:file:px-2
             file:rounded-full file:border-0
-            file:text-base file:font-semibold
+            file:text-base max-sm:file:text-sm file:font-semibold
              file:text-black 
             hover:file:cursor-pointer file:bg-primary-pink
             `}

@@ -27,7 +27,9 @@ function BlogData({ imageFileData }) {
       <form onSubmit={handleSubmit(submitBlog)} className="w-full">
         <div className={`title w-full flex flex-col items-start `}>
           <label
-            className={`font-medium text-xl ${errors.title ? "mb-0" : "mb-1"} `}
+            className={`font-medium text-xl max-sm:text-base ${
+              errors.title ? "mb-0" : "mb-1"
+            } `}
           >
             Blog Title
           </label>
@@ -45,7 +47,7 @@ function BlogData({ imageFileData }) {
         </div>
         <div className="relative content w-full aspect-[16/8] flex flex-col items-start">
           <label
-            className={`font-medium text-xl ${
+            className={`font-medium text-xl max-sm:text-base ${
               errors.content ? "mb-0" : "mb-1"
             }`}
           >
@@ -65,7 +67,7 @@ function BlogData({ imageFileData }) {
 
           <button
             type="submit"
-            className=" mt-8 px-8 py-3 bg-primary-pink rounded-2xl border-2 border-black font-semibold  "
+            className=" mt-8 px-8 py-3 max-sm:px-6 max-sm:py-2 max-sm:rounded-lg bg-primary-pink rounded-2xl border-2 border-black font-semibold max-sm:text-sm "
           >
             Add Blog
           </button>
