@@ -33,11 +33,11 @@ function Login() {
   }, []);
   return (
     <div
-      className="fixed inset-0 w-screen min-h-screen flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm "
+      className="fixed inset-0 overflow-y-scroll py-8 w-screen min-h-screen flex items-center justify-center bg-black bg-opacity-40  "
       onClick={handleNavigateRoot}
       id="overlay"
     >
-      <div className="relative  border-2 px-8 py-12 rounded-xl border-black max-w-[500px]  w-full md:mx-auto  mx-4 space-y-5 text-primary-pink bg-dark-primary-black max-sm:px-6 max-sm:py-4">
+      <div className="relative  border-2 px-8 py-12 rounded-xl mt-10 border-black max-w-[500px]  w-full md:mx-auto  mx-4 space-y-5 text-primary-pink bg-dark-primary-black max-sm:px-6 max-sm:py-4">
         <header className="text-center">
           <div className="logo mx-auto">
             <img
