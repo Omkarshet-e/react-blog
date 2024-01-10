@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Montserrat", system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .form-error {
+    @apply md:w-[calc(100%-7rem-10px)] ml-auto text-xs text-primary-pink-variant font-medium;
+  }
+  .get-border {
+    @apply border-2 border-white;
+  }
+}
+.app-bg {
+  /* background-color: #ea638c;
+  opacity: 1;
+  background-image: linear-gradient(135deg, #e83d95 25%, transparent 25%),
+    linear-gradient(225deg, #e83d95 25%, transparent 25%),
+    linear-gradient(45deg, #e83d95 25%, transparent 25%),
+    linear-gradient(315deg, #e83d95 25%, #ea638c 25%);
+  background-position: 11px 0, 11px 0, 0 0, 0 0;
+  background-size: 11px 11px;
+  background-repeat: repeat; */
+  background: #f857a6;
+  background: -webkit-linear-gradient(73deg, #f857a6 0%, #ff5858 100%);
+  background: linear-gradient(73deg, #f857a6 0%, #ff5858 100%);
+
+  /* background-color: #ea638c;
+  opacity: 1;
+  background-image: radial-gradient(circle at center center, #e83d95, #ea638c),
+    repeating-radial-gradient(
+      circle at center center,
+      #e83d95,
+      #e83d95,
+      11px,
+      transparent 22px,
+      transparent 11px
+    );
+  background-blend-mode: multiply; */
+}
