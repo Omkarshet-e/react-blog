@@ -3,8 +3,20 @@ import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { FaTimesCircle } from "react-icons/fa";
+import { useMutation } from "@tanstack/react-query";
+import { Error, Loading } from "../components";
+import auth from "../appwrite/auth";
+import { useDispatch } from "react-redux";
+import { LOGIN } from "../state/userSlice";
 
 function Login() {
+  useEffect(() => {
+    document.title = "Login";
+    return () => (document.title = "React Blog");
+  }, []);
+
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const {
     register,
@@ -12,6 +24,7 @@ function Login() {
     formState: { errors },
     reset,
   } = useForm({ mode: "onTouched" });
+
   function handleNavigateLogin() {
     navigate("/signup");
   }
@@ -20,17 +33,35 @@ function Login() {
       navigate("/");
     }
   }
+
+  const loginMutation = useMutation({
+    mutationFn: (data) => {
+      return auth.signIn(data);
+    },
+    onSuccess: (data) => {
+      console.log("login success");
+      console.log(data);
+      dispatch(LOGIN(data));
+      navigate("/");
+    },
+    onError: (error) => {
+      console.log(error.message);
+      navigate("/error");
+    },
+  });
+
   function handleSignIn(data) {
-    //todo : - handle sign in and navigate
-    console.log(data);
+    loginMutation.mutate(data);
     document.activeElement.blur();
     reset();
   }
 
-  useEffect(() => {
-    document.title = "Login";
-    return () => (document.title = "React Blog");
-  }, []);
+  if (loginMutation.isError) {
+    return <Error />;
+  }
+  if (loginMutation.isPending) {
+    return <Loading />;
+  }
   return (
     <div
       className="fixed inset-0 overflow-y-scroll py-8 w-screen min-h-screen flex items-center justify-center bg-black bg-opacity-40  "

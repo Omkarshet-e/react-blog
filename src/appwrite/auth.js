@@ -9,47 +9,37 @@ class AuthService {
     this.account = new Account(this.client);
   }
 
-  async signup({ email, password, username }) {
-    try {
-      const user = await this.account.create(
-        ID.unique(),
-        email,
-        password,
-        username
-      );
-      console.log("User Created");
-      return user;
-    } catch (error) {
-      console.log("appwrite error::signup error", error);
-    }
+  async signup({ username, email, password }) {
+    const user = await this.account.create(
+      ID.unique(),
+      email,
+      password,
+      username
+    );
+    console.log("User Created");
+    return user;
   }
 
   async signIn({ email, password }) {
-    try {
-      const session = await this.account.createEmailSession(email, password);
-      return session;
-    } catch (error) {
-      console.log("appwrite error::signin error", error);
-    }
+    const session = await this.account.createEmailSession(email, password);
+    console.log("User Signed in");
+    return session;
   }
 
   async signOut() {
-    try {
-      await this.account.deleteSessions();
-      return true;
-    } catch (error) {
-      console.log("appwrite error::signout error", error);
-      return false;
-    }
+    await this.account.deleteSessions();
+    return true;
   }
 
   async getUser() {
-    try {
-      const user = await this.account.get();
-      return user;
-    } catch (error) {
-      console.log("appwrite error::getUser error", error);
-    }
+    const user = await this.account.get();
+    return user;
+  }
+  async getSession($id) {
+    console.log($id);
+    const session = await this.account.getSession(String($id));
+    console.log(session);
+    return session;
   }
 }
 

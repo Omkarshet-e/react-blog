@@ -1,11 +1,36 @@
 import { useEffect } from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import auth from "../appwrite/auth";
+import { LOGIN } from "../state/userSlice";
 function Homepage() {
   useEffect(() => {
     document.title = "Home";
     return () => (document.title = "React Blog");
   }, []);
+
+  const authStatus = useSelector((state) => state.user.isUser);
+  const userData = useSelector((state) => state.user.userData);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function checkUser() {
+      if (authStatus) {
+        if (!userData) {
+          console.log("In undefined");
+          const getUserData = await auth.getUser();
+          console.log(getUserData);
+          if (getUserData) {
+            dispatch(LOGIN(getUserData));
+            console.log("dispatch login");
+          }
+        } else {
+          return;
+        }
+      }
+    }
+    checkUser();
+  }, [authStatus, userData, dispatch]);
 
   function handleNavigate() {}
   return (

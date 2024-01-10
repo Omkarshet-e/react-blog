@@ -3,8 +3,20 @@ import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { FaTimesCircle } from "react-icons/fa";
 import { useEffect } from "react";
+import auth from "../appwrite/auth";
+import { useMutation } from "@tanstack/react-query";
+import { Error, Loading } from "../components";
+import { useDispatch } from "react-redux";
+import { LOGIN } from "../state/userSlice";
 
 function Signup() {
+  useEffect(() => {
+    document.title = "Sign Up";
+    return () => (document.title = "React Blog");
+  }, []);
+
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const {
     register,
@@ -21,28 +33,74 @@ function Signup() {
       navigate("/");
     }
   }
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
-  function handleSignUp(data) {
-    // todo handle sign up and navigate
-    console.log("In submit");
+  const loginMutation = useMutation({
+    mutationFn: (data) => {
+      return auth.signIn(data);
+    },
+    onSuccess: (data) => {
+      console.log("login success");
+      console.log(data);
+      dispatch(LOGIN(data));
+      navigate("/");
+    },
+    onError: (error) => {
+      console.log(error);
+      console.log(error.name);
+      console.log("error code", error.code);
+      navigate("/error");
+    },
+  });
+
+  const signupMutation = useMutation({
+    mutationFn: (data) => {
+      return auth.signup(data);
+    },
+    onSuccess: (data) => {
+      console.log("signup success");
+      console.log(data);
+      navigate("/");
+    },
+    onError: (error) => {
+      console.log(error);
+      console.log(error.message);
+      if (
+        error.message ===
+        "A user with the same id, email, or phone already exists in this project."
+      ) {
+        window.alert("User Already Exists");
+      } else {
+        navigate("/error");
+      }
+    },
+  });
+
+  async function handleSignUp(data) {
+    signupMutation.mutate(data, {
+      onSuccess: () => {
+        console.log(data);
+        const { email, password } = data;
+        loginMutation.mutate({ email, password });
+      },
+    });
     document.activeElement.blur();
-    console.log(data);
     reset();
   }
-  useEffect(() => {
-    document.title = "Sign Up";
-    return () => (document.title = "React Blog");
-  }, []);
+
+  if (signupMutation.isPending) {
+    return <Loading />;
+  }
+  if (signupMutation.isError) {
+    return <Error />;
+  }
+
   return (
     <div
-      className="fixed overflow-y-scroll inset-0 py-8 w-screen min-h-screen flex items-center justify-center bg-black bg-opacity-40 "
+      className="fixed overflow-y-scroll inset-0 py-10 w-screen min-h-screen flex items-center justify-center bg-black bg-opacity-40 "
       onClick={handleNavigateRoot}
       id="overlay"
     >
       <div
-        className="relative border-2 px-8 shadow-2xl shadow-black lg:py-12 sm:py-6 py-4 rounded-xl border-black max-w-[500px]  w-full md:mx-auto mt-20 mb-3 mx-4 space-y-5 text-primary-pink bg-dark-primary-black max-sm:px-6 max-sm:py-4"
+        className="relative border-2 px-8 shadow-2xl shadow-black 2xl:py-12 sm:py-6 py-4 rounded-xl border-black max-w-[500px]  w-full md:mx-auto mt-20 mb-3 mx-4 space-y-5 text-primary-pink bg-dark-primary-black max-sm:px-6 max-sm:py-4"
         id="modal"
       >
         <header className="text-center">
