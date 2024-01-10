@@ -3,17 +3,17 @@ import ImageUpload from "../components/New Blog/ImageUpload";
 import BlogData from "../components/New Blog/BlogData";
 
 function AddBlog() {
-  const [imageFileData, setImageFileData] = useState({});
+  const [imageFileData, setImageFileData] = useState(null);
 
-  useEffect(() => {
-    console.log(imageFileData);
-  }, [imageFileData]);
+  // useEffect(() =>
+  //   console.log(imageFileData);
+  // }, [imageFileData]);
 
   return (
-    <div className="w-full  min-h-[90vh] bg-[#ff758f]   border-black border-4">
-      <div className="h-full lg:max-w-[calc(88%-4rem)] lg:mx-auto max-lg:px-8   flex max-xl:flex-col-reverse  gap-2 max-md:py-10">
+    <div className="w-full  bg-[#ff758f]  border-black border-4 min-h-[30vw] pt-8 pb-4 ">
+      <div className="h-full xl:max-w-[calc(88%-4rem)] lg:max-w-[calc(97%)] lg:mx-auto max-lg:px-8 flex max-lg:flex-col  gap-5 lg:gap-2">
         <ImageUpload setImageFileData={setImageFileData} />
-        <BlogData />
+        <BlogData imageFileData={imageFileData} />
       </div>
     </div>
   );

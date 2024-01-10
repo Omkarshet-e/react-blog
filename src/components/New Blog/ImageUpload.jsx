@@ -26,7 +26,7 @@ function ImageUpload({ setImageFileData }) {
   }
 
   return (
-    <div className="flex-1 flex flex-col items-center p-2 gap-6 justify-center border-2">
+    <div className="flex-1 flex flex-col items-center p-2 gap-6 justify-start h-fit">
       <div className="relative bg-dark-variant-gray w-full h-auto grow-0 aspect-video rounded-xl overflow-hidden">
         {!file && (
           <div className="w-full h-full bg-dark-primary-black flex justify-center items-center ">
