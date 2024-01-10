@@ -53,7 +53,7 @@ function Footer() {
   ];
   // md:gap-16 sm:gap-12 space-x-2
   return (
-    <div className="mt-0  bg-dark-primary-black text-primary-pink">
+    <div className="mt-0  bg-dark-primary-black text-primary-pink/85 ">
       <div className="lg:max-w-[88%] lg:mx-auto w-full px-8 max-sm:px-0 max-sm:mt-0">
         <div className="flex items-start max-md:items-center max-md:flex-col ">
           <div className="left flex gap-3 items-center p-2 max-md:pb-1 basis-2/6">
@@ -71,7 +71,7 @@ function Footer() {
                 {companyItems.map((item) => {
                   return (
                     <div
-                      className="md:text-sm font-light"
+                      className="md:text-sm font-light text-primary-pink/70 hover:text-primary-pink"
                       key={(item.path, item.item)}
                     >
                       <Link>{item.item}</Link>
@@ -86,7 +86,7 @@ function Footer() {
                 {supportItems.map((item) => {
                   return (
                     <div
-                      className="md:text-sm font-light"
+                      className="md:text-sm font-light text-primary-pink/70 hover:text-primary-pink"
                       key={(item.path, item.item)}
                     >
                       <Link>{item.item}</Link>
@@ -101,7 +101,7 @@ function Footer() {
                 {legalItems.map((item) => {
                   return (
                     <div
-                      className="md:text-sm font-light"
+                      className="md:text-sm font-light text-primary-pink/70 hover:text-primary-pink"
                       key={(item.path, item.item)}
                     >
                       <Link>{item.item}</Link>
