@@ -10,7 +10,7 @@ function AddBlog() {
   // }, [imageFileData]);
 
   return (
-    <div className="w-full  bg-[#ff758f]  border-black border-4 min-h-[30vw] pt-8 pb-4 ">
+    <div className="w-full  bg-[#ff758f] min-h-[30vw] pt-8 pb-4 ">
       <div className="h-full xl:max-w-[calc(88%-4rem)] lg:max-w-[calc(97%)] lg:mx-auto max-lg:px-8 flex max-lg:flex-col  gap-5 lg:gap-2">
         <ImageUpload setImageFileData={setImageFileData} />
         <BlogData imageFileData={imageFileData} />
