@@ -48,6 +48,11 @@ function Header() {
       item: "Login",
       status: !authStatus,
     },
+    {
+      // path: "/login",
+      item: "Logout",
+      status: authStatus,
+    },
   ];
 
   return (
@@ -71,31 +76,36 @@ function Header() {
             if (item.status)
               return (
                 <div
-                  className={`list-none cursor-pointer max-sm:pl-[15%] max-sm:font-light max-sm:text-sm md:text-base  max-sm:py-4 ${
+                  className={`list-none cursor-pointer max-sm:pl-[15%] max-sm:font-light max-sm:text-sm md:text-base xl:text-xl max-sm:py-4 ${
                     item.item === "Sign Up"
-                      ? "  sm:text-black sm:p-2 sm:px-3 sm:font-semibold  sm:rounded-md sm:bg-primary-pink/80 sm:hover:text-black hover:bg-primary-pink"
+                      ? "  sm:text-black sm:p-2 sm:px-3 sm:font-semibold  sm:rounded-md sm:bg-primary-pink/80 sm:hover:text-black sm:hover:bg-primary-pink"
                       : ""
                   }
                    ${
-                     item.item === "Login"
-                       ? "sm:bg-primary-pink/80 sm:text-black sm:font-semibold sm:p-2 sm:px-3 sm:rounded-md hover:bg-primary-pink sm:hover:text-black "
+                     item.item === "Login" || item.item === "Logout"
+                       ? "sm:bg-primary-pink/80 sm:text-black sm:font-semibold sm:p-2 sm:px-3 sm:rounded-md sm:hover:bg-primary-pink sm:hover:text-black "
                        : ""
                    }`}
                   key={(item.path, item.item)}
                   onClick={handleToggleOpen}
                 >
-                  <Link to={item.path}>{item.item}</Link>
+                  {item.item === "Logout" && (
+                    <button onClick={handleLogout}>{item.item}</button>
+                  )}
+                  {item.item !== "Logout" && (
+                    <Link to={item.path}>{item.item}</Link>
+                  )}
                 </div>
               );
           })}
-          {authStatus && (
+          {/* {authStatus && (
             <button
-              className="list-none cursor-pointer max-sm:pl-[15%] max-sm:font-light max-sm:text-sm md:text-base  max-sm:py-4  sm:bg-primary-pink/80 sm:text-black sm:font-semibold sm:p-2 sm:px-3 sm:rounded-md hover:bg-primary-pink sm:hover:text-black"
+              className="list-none cursor-pointer max-sm:pl-[15%] max-sm:font-light max-sm:text-sm md:text-base  max-sm:py-4 xl:text-xl  sm:bg-primary-pink/80 sm:text-black sm:font-semibold sm:p-2 sm:px-3 sm:rounded-md hover:bg-primary-pink sm:hover:text-black"
               onClick={handleLogout}
             >
               Logout
             </button>
-          )}
+          )} */}
         </div>
         <div onClick={handleToggleOpen} className="toggle sm:hidden ">
           <div className={`${open ? "hidden" : ""}`}>

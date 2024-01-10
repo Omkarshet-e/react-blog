@@ -45,7 +45,7 @@ function Login() {
       navigate("/");
     },
     onError: (error) => {
-      console.log(error.message);
+      console.log(error);
       navigate("/error");
     },
   });
