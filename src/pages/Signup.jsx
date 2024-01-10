@@ -18,7 +18,7 @@ function Signup() {
   }
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
-      navigate(-1);
+      navigate("/");
     }
   }
   function handleSignUp(data) {
@@ -113,7 +113,7 @@ function Signup() {
           </div>
           <div className="btn-container flex ">
             <button
-              className="mt-4 text-black bg-primary-pink-variant    border-2 border-black px-4 py-4 grow max-w-60 mx-auto rounded-2xl"
+              className="mt-4 text-black bg-primary-pink-variant hover:bg-primary-pink  border-2 border-black px-4 py-4 grow max-w-60 mx-auto rounded-2xl"
               type="submit"
             >
               Sign Up
@@ -123,7 +123,7 @@ function Signup() {
         <p className="text-center mb-0 max-sm:text-xs text-primary-pink-variant">
           Already got an account?{" "}
           <span
-            className="font-semibold  underline italic cursor-pointer"
+            className="font-semibold hover:text-primary-pink  underline italic cursor-pointer"
             onClick={handleNavigateLogin}
           >
             Login
@@ -131,7 +131,7 @@ function Signup() {
           </span>
         </p>
         <div className="absolute -top-8 -right-3 bg-black rounded-full">
-          <Link to={-1}>
+          <Link to={"/"}>
             <FaTimesCircle size={30} />
           </Link>
         </div>

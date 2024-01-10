@@ -6,7 +6,7 @@ function BlogCard({ content }) {
   return (
     <div
       onClick={() => navigate("/blog/some-blog")}
-      className="  py-3 px-2 bg-dark-primary-black max-sm:aspect-[10/10] aspect-[10/12] rounded-lg ease-in-out duration-200  flex flex-col justify-between gap-5"
+      className="  py-3 px-2 bg-dark-primary-black max-sm:aspect-[10/10] aspect-[10/12] rounded-lg ease-in-out duration-200  flex flex-col justify-between gap-5 hover:scale-[1.02] cursor-pointer"
     >
       <div>
         <div className="image w-full p-2">
@@ -23,14 +23,14 @@ function BlogCard({ content }) {
             </h1>
           </div>
           <div className="py-1 ">
-            <p className="line-clamp-2 leading-5 text-base  font-medium text-primary-pink-variant/75">
+            <p className="line-clamp-2 leading-5 text-base  font-medium text-white/75">
               {content}
             </p>
           </div>
         </div>
       </div>
       <div className="pb-4">
-        <button className="text-black font-bold mx-2  bg-primary-pink px-3 py-2 rounded-md flex items-center gap-3">
+        <button className="text-black font-bold mx-2  bg-primary-pink/80 hover:bg-primary-pink  px-3 py-2 rounded-md flex items-center gap-3">
           Read More
           <FaLongArrowAltRight size={20} />
         </button>

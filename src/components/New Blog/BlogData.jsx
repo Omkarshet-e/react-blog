@@ -68,7 +68,8 @@ function BlogData({ imageFileData }) {
 
           <button
             type="submit"
-            className=" mt-8 px-8 py-3 max-sm:px-6 max-sm:py-2 max-sm:rounded-lg bg-primary-pink rounded-2xl border-2 border-black font-semibold max-sm:text-sm "
+            className=" mt-8 px-8 py-3 max-sm:px-6 max-sm:py-2 max-sm:rounded-lg 
+            bg-primary-pink/70 hover:bg-primary-pink hover:scale-[1.02] rounded-2xl border-2 border-black font-semibold max-sm:text-sm "
           >
             Add Blog
           </button>

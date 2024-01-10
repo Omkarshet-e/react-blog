@@ -64,12 +64,12 @@ function Header() {
                 <div
                   className={`list-none cursor-pointer max-sm:pl-[15%] max-sm:font-light max-sm:text-sm md:text-base  max-sm:py-4 ${
                     item.item === "Sign Up"
-                      ? "sm:border-2 sm:border-primary-pink sm:text-primary-pink sm:font-semibold sm:p-[calc(0.5rem-2px)] sm:rounded-md sm:hover:bg-primary-pink sm:hover:text-black"
+                      ? "  sm:text-black sm:p-2 sm:px-3 sm:font-semibold  sm:rounded-md sm:bg-primary-pink/80 sm:hover:text-black hover:bg-primary-pink"
                       : ""
                   }
                    ${
                      item.item === "Login" || item.item === "Logout"
-                       ? "sm:bg-primary-pink sm:text-black sm:font-semibold sm:p-2 sm:px-3 sm:rounded-md sm:hover:bg-primary-pink-variant sm:hover:text-black "
+                       ? "sm:bg-primary-pink/80 sm:text-black sm:font-semibold sm:p-2 sm:px-3 sm:rounded-md hover:bg-primary-pink sm:hover:text-black "
                        : ""
                    }`}
                   key={(item.path, item.item)}

@@ -13,7 +13,7 @@ function BlogPost() {
           <div className="p-2 text-2xl max-sm:text-xl  max-sm:-tracking-tighter tracking-wide font-bold capitalize">
             Need of react in todays eco sytem
           </div>
-          <div className="p-2 text-lg max-xl:text-base max-sm:text-sm font-medium">
+          <div className="p-2 mb-8 text-lg max-xl:text-base max-sm:text-sm font-medium">
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
               eligendi esse voluptatum placeat molestiae nam est, sapiente

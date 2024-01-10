@@ -28,7 +28,7 @@ function Homepage() {
             </div>
             <Link
               to={"blogs"}
-              className="text-black text-xl max-md:text-base bg-primary-pink px-3 py-2 rounded-xl flex items-center gap-3 font-semibold"
+              className="text-black text-xl max-md:text-base bg-primary-pink/80 hover:bg-primary-pink  px-3 py-2 rounded-xl flex items-center gap-3 font-semibold"
               onClick={handleNavigate}
             >
               Get Started <FaLongArrowAltRight size={20} />
