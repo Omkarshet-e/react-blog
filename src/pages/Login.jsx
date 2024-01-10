@@ -11,7 +11,7 @@ function Login() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm();
+  } = useForm({ mode: "onTouched" });
   function handleNavigateLogin() {
     navigate("/signup");
   }
@@ -62,7 +62,7 @@ function Login() {
           <div>
             <Input
               {...register("email", {
-                required: true,
+                required: "* This field is required",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                   message: "* Invalid email address",
@@ -78,7 +78,7 @@ function Login() {
           <div>
             <Input
               {...register("password", {
-                required: true,
+                required: "* This field is required",
                 minLength: {
                   value: 8,
                   message: "* Password must have atleast 8 characters",

@@ -11,7 +11,7 @@ function Signup() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ reValidationMode: "onBlur" });
+  } = useForm({ mode: "onTouched" });
 
   function handleNavigateLogin() {
     navigate("/login");
@@ -21,6 +21,9 @@ function Signup() {
       navigate("/");
     }
   }
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
   function handleSignUp(data) {
     // todo handle sign up and navigate
     console.log("In submit");
@@ -65,7 +68,7 @@ function Signup() {
           <div>
             <Input
               {...register("username", {
-                required: true,
+                required: "* This field is required ",
                 minLength: {
                   value: 6,
                   message: "* Username must have atleast 6 characters",
@@ -81,7 +84,7 @@ function Signup() {
           <div>
             <Input
               {...register("email", {
-                required: true,
+                required: "* This field is required ",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                   message: "* Invalid email address",
@@ -97,7 +100,7 @@ function Signup() {
           <div>
             <Input
               {...register("password", {
-                required: true,
+                required: "* This field is required ",
                 minLength: {
                   value: 8,
                   message: "* Username must have atleast 8 characters",
