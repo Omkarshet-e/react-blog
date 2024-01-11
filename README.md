@@ -1,8 +1,8 @@
-# React + Vite
+# React Blog
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React Blog is a single page application built using **React** (Vite) for Frontend
+and **Appwrite** for **Backend as a Service** (BaaS)
 
-Currently, two official plugins are available:
+**Technologies Used: -** React, Javascript, Tailwind, Redux-Toolkit, React-router, React Query/TanStack Query, React-hook-form & Appwrite (Baas)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Demo Link: -** Access my site at [React Blog](https://react-blog-beige.vercel.app/)
