@@ -93,12 +93,12 @@ function Signup() {
 
   return (
     <div
-      className="fixed overflow-y-scroll inset-0 py-10 w-screen min-h-screen flex items-center justify-center bg-black bg-opacity-40 "
+      className="relative inset-0 py-6 w-screen flex items-center justify-center bg-black bg-opacity-70 "
       onClick={handleNavigateRoot}
       id="overlay"
     >
       <div
-        className="relative border-2 px-8 shadow-2xl shadow-black 2xl:py-12 sm:py-6 py-4 rounded-xl border-black max-w-[500px]  w-full md:mx-auto sm:mt-20 sm:mb-6 mb:3 mt:3 mx-4 space-y-5 text-primary-pink bg-dark-primary-black max-sm:px-6 max-sm:py-4"
+        className="relative border-2 px-8 shadow-2xl shadow-black 2xl:py-12 sm:py-6 py-4 rounded-xl border-black max-w-[500px]  w-full md:mx-auto  mx-4 space-y-5 text-primary-pink bg-dark-primary-black max-sm:px-6 max-sm:py-4"
         id="modal"
       >
         <header className="text-center">

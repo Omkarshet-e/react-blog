@@ -17,7 +17,7 @@ const Input = forwardRef(function Input(
         </label>
       )}
       <input
-        className={`focus:outline-none focus:ring-primary-pink-variant focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-primary-black rounded-lg w-full px-3 py-2 
+        className={`focus:outline-none focus:ring-primary-pink-variant focus:ring-1 lg:focus:ring-offset-2 focus:ring-offset-dark-primary-black rounded-lg w-full px-3 py-2 
          bg-dark-variant-gray text-white font-sans max-sm:text-base max-sm:mt-1 ${className}`}
         type={type}
         id={id}
