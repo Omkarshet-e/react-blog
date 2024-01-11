@@ -22,7 +22,7 @@ function BlogCard({ title, content, imageId, userId, $id }) {
 
   function getImgSrc() {
     const src = storage.getFilePreview(imageId);
-    return src;
+    return src.href;
   }
   function handleBlogPost() {
     navigate(`/blog/${title}`, {
