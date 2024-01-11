@@ -46,8 +46,7 @@ function Login() {
       const destination = origin === "signup" ? "/blogs" : -1;
       navigate(destination);
     },
-    onError: (error) => {
-      console.log(error);
+    onError: () => {
       navigate("/error", { state: { message: "Error Logging-In" } });
     },
   });

@@ -22,7 +22,6 @@ function BlogCard({ title, content, imageId, userId, $id }) {
 
   function getImgSrc() {
     const src = storage.getFilePreview(imageId);
-    console.log(src);
     return src;
   }
   function handleBlogPost() {

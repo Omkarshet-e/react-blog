@@ -42,8 +42,7 @@ function BlogData({ imageFileData }) {
     mutationFn: (file) => {
       return storage.createFile(file);
     },
-    onError: (error) => {
-      console.log(error);
+    onError: () => {
       navigate("/error", {
         state: {
           message: "An error occurred while uploading the Image.",

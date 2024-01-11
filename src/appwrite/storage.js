@@ -19,7 +19,6 @@ class StorageService {
 
   getFilePreview($id) {
     const preview = this.storage.getFilePreview(bucketId, $id);
-    console.log(preview);
     return preview;
   }
 }

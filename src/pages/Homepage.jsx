@@ -22,12 +22,9 @@ function Homepage() {
     async function checkUser() {
       if (authStatus) {
         if (!userData) {
-          console.log("In undefined");
           const getUserData = await auth.getUser();
-          console.log(getUserData);
           if (getUserData) {
             dispatch(LOGIN(getUserData));
-            console.log("dispatch login");
           } else {
             navigate("/error", { state: { message: "You are not Logged-In" } });
           }

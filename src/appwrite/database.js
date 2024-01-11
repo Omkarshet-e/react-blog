@@ -23,12 +23,8 @@ class DatabaseService {
   }
 
   async getDocument($id) {
-    try {
-      const document = await this.database.getDocument(dbId, collectionId, $id);
-      return document;
-    } catch (error) {
-      console.log("appwrite error::getDocument error", error);
-    }
+    const document = await this.database.getDocument(dbId, collectionId, $id);
+    return document;
   }
 
   async getAllDocuments() {

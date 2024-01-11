@@ -26,12 +26,10 @@ function AllBlogs() {
 
   async function getBlogsList() {
     const response = await db.getAllDocuments();
-    console.log(response.documents);
     return response.documents;
   }
 
   if (isLoading) {
-    console.log("Loading");
     return <Loading />;
   }
 
@@ -46,7 +44,6 @@ function AllBlogs() {
         grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 "
       >
         {blogList?.map((blogObj) => {
-          console.log(blogObj);
           return (
             <BlogCard
               key={`${blogObj.$id} ${blogObj.$createdAt}`}

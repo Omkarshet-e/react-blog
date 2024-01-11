@@ -47,11 +47,8 @@ function Signup() {
       const destination = origin === "login" ? "/blogs" : -1;
       navigate(destination);
     },
-    onError: (error) => {
-      console.log(error);
-      console.log(error.name);
-      console.log("error code", error.code);
-      navigate("/error");
+    onError: () => {
+      navigate("/error", { state: { message: "Error Signing-In" } });
     },
   });
 
@@ -81,7 +78,6 @@ function Signup() {
   async function handleSignUp(data) {
     signupMutation.mutate(data, {
       onSuccess: () => {
-        console.log(data);
         const { email, password } = data;
         loginMutation.mutate({ email, password });
       },
