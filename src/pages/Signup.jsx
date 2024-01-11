@@ -63,14 +63,17 @@ function Signup() {
     onError: (error) => {
       console.log(error);
       console.log(error.message);
-      if (
-        error.message ===
-        "A user with the same id, email, or phone already exists in this project."
-      ) {
-        window.alert("User Already Exists");
-      } else {
-        navigate("/error");
-      }
+      navigate("/error", {
+        state: { title: "Error", message: "User Already Exists" },
+      });
+      setTimeout(() => {
+        if (
+          error.message ===
+          "A user with the same id, email, or phone already exists in this project."
+        ) {
+          window.alert("User Already Exists");
+        }
+      }, 10);
     },
   });
 

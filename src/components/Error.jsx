@@ -1,16 +1,20 @@
+import { useEffect } from "react";
 import { FaLongArrowAltLeft } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 function Error() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+
+  useEffect(() => console.log(state), [state]);
   return (
     <div className="bg-black w-full text-primary-pink">
       <div className=" w-full h-full flex flex-col items-center justify-center ">
         <div className=" flex flex-col items-center">
           <h1 className="h-fit w-fit  leading-none text-[10rem] font-bold tracking-wider max-sm:text-9xl">
-            404
+            {state?.title || `404`}
           </h1>
           <p className="text-primary-pink-variant mb-4 mt-2 text-sm">
-            Page not found
+            {state?.message || `Page not found`}
           </p>
           <button
             className="bg-primary-pink text-black font-semibold w-fit h-fit flex items-center gap-3 px-5 py-2 rounded-xl"

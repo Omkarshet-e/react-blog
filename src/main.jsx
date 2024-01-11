@@ -10,7 +10,6 @@ import Error from "./components/Error.jsx";
 import store from "./state/store.js";
 import App from "./App.jsx";
 import Homepage from "./pages/Homepage.jsx";
-import Logout from "./pages/Logout.jsx";
 import AllBlogs from "./pages/AllBlogs.jsx";
 import AddBlog from "./pages/AddBlog.jsx";
 import AuthLayout from "./pages/AuthLayout.jsx";
@@ -34,10 +33,7 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
-      {
-        path: "/logout",
-        element: <Logout />,
-      },
+
       {
         path: "add-blog",
         element: (

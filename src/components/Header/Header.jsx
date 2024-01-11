@@ -49,7 +49,6 @@ function Header() {
       status: !authStatus,
     },
     {
-      // path: "/login",
       item: "Logout",
       status: authStatus,
     },
