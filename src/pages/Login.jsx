@@ -43,7 +43,7 @@ function Login() {
     },
     onSuccess: (data) => {
       dispatch(LOGIN(data));
-      const destination = origin === "signup" ? "/" : -1;
+      const destination = origin === "signup" ? "/blogs" : -1;
       navigate(destination);
     },
     onError: (error) => {

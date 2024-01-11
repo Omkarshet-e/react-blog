@@ -44,7 +44,7 @@ function Signup() {
     },
     onSuccess: (data) => {
       dispatch(LOGIN(data));
-      const destination = origin === "login" ? "/" : -1;
+      const destination = origin === "login" ? "/blogs" : -1;
       navigate(destination);
     },
     onError: (error) => {
