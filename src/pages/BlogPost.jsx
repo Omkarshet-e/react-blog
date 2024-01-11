@@ -1,25 +1,35 @@
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Loading } from "../components";
 
 function BlogPost() {
-  let params = useParams();
-  console.log(params.id);
+  useEffect(() => {
+    document.title = title;
+    return () => (document.title = "React Blog");
+  }, []);
+  const [imgSrc, setImgSrc] = useState(null);
+  // const [loading, setLoading] = useState(true);
+  const { state } = useLocation();
+  const { userId, title, content, img } = state;
+  useEffect(() => {
+    setImgSrc(JSON.parse(img));
+    // return () => setLoading(false);
+  }, [img]);
+  // if (loading) {
+  //   return <Loading />;
+  // }
   return (
     <div className="w-full py-2">
       <div className="lg:max-w-[calc(88%-4rem)] lg:mx-auto w-full max-lg:px-8 pt-6 ">
         <div className="img w-3/5 max-xl:w-4/5 mx-auto ">
-          <img src="/assets/bg-hex.jpg" alt="" className="w-full h-full" />
+          <img src={imgSrc} alt="" className="w-full h-full" />
         </div>
         <div className="w-4/5 mx-auto mt-8 divide-y-2 divide-white/40">
           <div className="p-2 text-2xl max-sm:text-xl  max-sm:-tracking-tighter tracking-wide font-bold capitalize">
-            Need of react in todays eco sytem
+            {title}
           </div>
           <div className="p-2 mb-8 text-lg max-xl:text-base max-sm:text-sm font-medium">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-              eligendi esse voluptatum placeat molestiae nam est, sapiente
-              eveniet alias consequuntur reiciendis veniam tempora, iste
-              delectus iure quod odio dolores praesentium
-            </p>
+            <p>{content}</p>
           </div>
         </div>
       </div>

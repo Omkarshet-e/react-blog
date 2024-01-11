@@ -13,7 +13,7 @@ class DatabaseService {
   }
 
   async createDocument(data) {
-    //   todo : - pass in { title, content, imageId } ****
+    //   todo : - pass in { title, content, imageId ,userId} ****
     try {
       const document = await this.database.createDocument(
         dbId,
@@ -37,14 +37,10 @@ class DatabaseService {
   }
 
   async getAllDocuments() {
-    try {
-      const docList = await this.database.listDocuments(dbId, collectionId, [
-        Query.orderDesc("createdDate"),
-      ]);
-      return docList;
-    } catch (error) {
-      console.log("appwrite error::getAllDocs error", error);
-    }
+    const docList = await this.database.listDocuments(dbId, collectionId, [
+      Query.orderDesc("title"),
+    ]);
+    return docList;
   }
 
   async updateDocument($id, data) {

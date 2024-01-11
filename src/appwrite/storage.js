@@ -13,16 +13,8 @@ class StorageService {
   }
 
   async createFile(file) {
-    try {
-      const fileDoc = await this.storage.createFile(
-        bucketId,
-        ID.unique(),
-        file
-      );
-      return fileDoc;
-    } catch (error) {
-      console.log("appwrite error::createFile error", error);
-    }
+    const fileDoc = await this.storage.createFile(bucketId, ID.unique(), file);
+    return fileDoc;
   }
 
   getFilePreview($id) {

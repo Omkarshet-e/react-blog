@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import auth from "../../appwrite/auth";
 import { LOGOUT } from "../../state/userSlice";
 function Header() {
   const [open, setOpen] = useState(false);
   const authStatus = useSelector((state) => state.user.isUser);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   function handleToggleOpen() {
     setOpen((open) => !open);
   }
@@ -20,7 +19,6 @@ function Header() {
       const response = await auth.signOut();
       console.log("Logout response", response);
     }
-    navigate("/");
   }
   const navItems = [
     {

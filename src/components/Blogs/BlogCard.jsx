@@ -1,25 +1,58 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
 import { FaLongArrowAltRight } from "react-icons/fa";
-function BlogCard({ content }) {
+import { useQuery } from "@tanstack/react-query";
+import storage from "../../appwrite/storage";
+import Loading from "../Loading";
+import Error from "../Error";
+import { useEffect } from "react";
+function BlogCard({ title, content, imageId, userId, $id }) {
   const navigate = useNavigate();
+
+  const {
+    data: imgSrc,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["imgSrc", imageId],
+    queryFn: getImgSrc,
+  });
+
+  function getImgSrc() {
+    const src = storage.getFilePreview(imageId);
+    console.log(src);
+    return src;
+  }
+  function handleBlogPost() {
+    navigate(`/blog/${title}`, {
+      state: { userId, title, content, img: JSON.stringify(imgSrc) },
+    });
+  }
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (isError) {
+    return <Error />;
+  }
+
   return (
     <div
-      onClick={() => navigate("/blog/some-blog")}
+      onClick={handleBlogPost}
       className="  py-3 px-2 bg-dark-primary-black max-sm:aspect-[10/10] aspect-[10/12] rounded-lg ease-in-out duration-200  flex flex-col justify-between gap-5 hover:scale-[1.02] cursor-pointer"
     >
       <div>
-        <div className="image w-full p-2">
+        <div className="image w-full p-2 aspect-video">
           <img
-            src="assets/bg-2.avif"
-            alt="bg-image"
+            src={imgSrc}
+            alt={title}
             className="w-full h-full object-cover border-2 rounded-lg"
           />
         </div>
         <div className="px-2  ">
           <div className="py-1 font-bold text-xl ">
             <h1 className="truncate tracking-widest text-primary-pink-variant">
-              Titlejdbfsjhdfbsjdhfnbsdjfnbsdjfsnbdfjshdnfbsd
+              {title}
             </h1>
           </div>
           <div className="py-1 ">

@@ -1,4 +1,11 @@
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import db from "../../appwrite/database";
+import { useSelector } from "react-redux";
+import storage from "../../appwrite/storage";
+import { useNavigate } from "react-router-dom";
+import Loading from "../Loading";
+import Error from "../Error";
 /* eslint-disable react/prop-types */
 
 function BlogData({ imageFileData }) {
@@ -9,18 +16,64 @@ function BlogData({ imageFileData }) {
   } = useForm({
     reValidateMode: "onChange",
   });
+  const userId = useSelector((state) => state.user.userData.userId);
+  const navigate = useNavigate();
+
+  const blogMutation = useMutation({
+    mutationFn: (data) => {
+      return db.createDocument({ ...data, userId });
+    },
+    onSuccess: (data) => {
+      navigate("/blogs");
+    },
+    onError: (error) => {
+      console.log(error);
+      navigate("/error", {
+        state: {
+          message:
+            "An error occurred while uploading the blog. Try again later",
+        },
+      });
+    },
+  });
+
+  const imageFileMutation = useMutation({
+    mutationFn: (file) => {
+      return storage.createFile(file);
+    },
+    onError: (error) => {
+      console.log(error);
+      navigate("/error", {
+        state: {
+          message:
+            "An error occurred while uploading the blog. Try again later",
+        },
+      });
+    },
+  });
 
   function submitBlog(data) {
     if (imageFileData) {
-      //   console.log(Object.entries.length);
-      console.log(data);
-      console.log(imageFileData);
-      console.log("successful blog submit");
+      imageFileMutation.mutate(imageFileData, {
+        onSuccess: (imageData) => {
+          const imageId = imageData.$id;
+          blogMutation.mutate({ ...data, imageId });
+        },
+      });
     } else {
-      console.log(imageFileData);
-      console.log("Error");
+      alert("Upload a image to continue");
       //todo upload image alert
     }
+  }
+
+  const isLoading = blogMutation.isLoading || imageFileMutation.isLoading;
+  const isError = blogMutation.isError || imageFileMutation.isError;
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (isError) {
+    return <Error />;
   }
 
   return (
