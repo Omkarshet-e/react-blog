@@ -1,8 +1,7 @@
+/* eslint-disable react/prop-types */
 import { forwardRef, useId } from "react";
 
-// eslint-disable-next-line react/prop-types
 const Input = forwardRef(function Input(
-  // eslint-disable-next-line react/prop-types
   { label, type = "text", className = "", ...props },
   ref
 ) {

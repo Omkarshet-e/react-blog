@@ -1,20 +1,20 @@
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
 import { Provider } from "react-redux";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import "./index.css";
-
+import App from "./App.jsx";
+import Homepage from "./pages/Homepage.jsx";
+import AuthLayout from "./pages/AuthLayout.jsx";
+import AddBlog from "./pages/AddBlog.jsx";
+import AllBlogs from "./pages/AllBlogs.jsx";
+import BlogPost from "./pages/BlogPost.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import Error from "./components/Error.jsx";
 import store from "./state/store.js";
-import App from "./App.jsx";
-import Homepage from "./pages/Homepage.jsx";
-import AllBlogs from "./pages/AllBlogs.jsx";
-import AddBlog from "./pages/AddBlog.jsx";
-import AuthLayout from "./pages/AuthLayout.jsx";
-import BlogPost from "./pages/BlogPost.jsx";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -25,15 +25,6 @@ const router = createBrowserRouter([
         index: true,
         element: <Homepage />,
       },
-      {
-        path: "/signup",
-        element: <Signup />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-
       {
         path: "add-blog",
         element: (
@@ -57,6 +48,14 @@ const router = createBrowserRouter([
             <BlogPost />
           </AuthLayout>
         ),
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
       {
         path: "error",

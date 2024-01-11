@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import { FaLongArrowAltRight } from "react-icons/fa";
+
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { FaLongArrowAltRight } from "react-icons/fa";
+
 import auth from "../appwrite/auth";
 import { LOGIN } from "../state/userSlice";
+
 function Homepage() {
   useEffect(() => {
     document.title = "Home";
@@ -13,6 +16,8 @@ function Homepage() {
   const authStatus = useSelector((state) => state.user.isUser);
   const userData = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     async function checkUser() {
       if (authStatus) {
@@ -23,6 +28,8 @@ function Homepage() {
           if (getUserData) {
             dispatch(LOGIN(getUserData));
             console.log("dispatch login");
+          } else {
+            navigate("/error", { state: { message: "You are not Logged-In" } });
           }
         } else {
           return;
@@ -30,7 +37,7 @@ function Homepage() {
       }
     }
     checkUser();
-  }, [authStatus, userData, dispatch]);
+  }, [authStatus, userData, navigate, dispatch]);
 
   function handleNavigate() {}
   return (

@@ -1,7 +1,10 @@
 import { useEffect } from "react";
-import BlogCard from "../components/Blogs/BlogCard";
+
 import { useQuery } from "@tanstack/react-query";
-import { Error, Loading } from "../components";
+import { useNavigate } from "react-router-dom";
+
+import BlogCard from "../components/Blogs/BlogCard";
+import { Loading } from "../components";
 import db from "../appwrite/database";
 
 function AllBlogs() {
@@ -9,6 +12,8 @@ function AllBlogs() {
     document.title = "All Blogs";
     return () => (document.title = "React Blog");
   }, []);
+
+  const navigate = useNavigate();
 
   const {
     isError,
@@ -31,8 +36,7 @@ function AllBlogs() {
   }
 
   if (isError) {
-    console.log("Error");
-    return <Error />;
+    navigate("/error", { state: { message: "Error fetching data" } });
   }
 
   return (

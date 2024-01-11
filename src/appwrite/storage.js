@@ -18,13 +18,9 @@ class StorageService {
   }
 
   getFilePreview($id) {
-    try {
-      const preview = this.storage.getFilePreview(bucketId, $id);
-      console.log(preview);
-      return preview;
-    } catch (error) {
-      console.log("appwrite error::getFilePreview error", error);
-    }
+    const preview = this.storage.getFilePreview(bucketId, $id);
+    console.log(preview);
+    return preview;
   }
 }
 

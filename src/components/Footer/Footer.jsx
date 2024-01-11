@@ -51,7 +51,7 @@ function Footer() {
       item: "Licensing",
     },
   ];
-  // md:gap-16 sm:gap-12 space-x-2
+
   return (
     <div className="mt-0  bg-dark-primary-black text-primary-pink/85 ">
       <div className="lg:max-w-[88%] lg:mx-auto w-full px-8 max-sm:px-0 max-sm:mt-0">
@@ -80,6 +80,7 @@ function Footer() {
                 })}
               </div>
             </div>
+
             <div className="support space-y-2 max-md:text-sm max-sm:text-[0.7rem] max-md:px-5 max-sm:px-2">
               <h2>Support</h2>
               <div>
@@ -95,6 +96,7 @@ function Footer() {
                 })}
               </div>
             </div>
+
             <div className="legal space-y-2 max-md:text-sm max-sm:text-[0.7rem] max-md:px-5 max-sm:px-2">
               <h2>Legals</h2>
               <div>
@@ -112,6 +114,7 @@ function Footer() {
             </div>
           </div>
         </div>
+
         <div className="text-center text-xs mt-1 mb-[2px] border-t-2 border-white/20 py-1">
           <h1>&copy; Copyright Omkar Shete .</h1>
         </div>

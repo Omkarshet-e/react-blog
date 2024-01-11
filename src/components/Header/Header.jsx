@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { FaBars, FaTimes } from "react-icons/fa";
+
 import auth from "../../appwrite/auth";
 import { LOGOUT } from "../../state/userSlice";
+
 function Header() {
   const [open, setOpen] = useState(false);
   const authStatus = useSelector((state) => state.user.isUser);
   const dispatch = useDispatch();
+
   function handleToggleOpen() {
     setOpen((open) => !open);
   }
@@ -16,8 +20,7 @@ function Header() {
     dispatch(LOGOUT());
     const activeSession = await auth.getUser();
     if (activeSession) {
-      const response = await auth.signOut();
-      console.log("Logout response", response);
+      await auth.signOut();
     }
   }
   const navItems = [
@@ -95,14 +98,6 @@ function Header() {
                 </div>
               );
           })}
-          {/* {authStatus && (
-            <button
-              className="list-none cursor-pointer max-sm:pl-[15%] max-sm:font-light max-sm:text-sm md:text-base  max-sm:py-4 xl:text-xl  sm:bg-primary-pink/80 sm:text-black sm:font-semibold sm:p-2 sm:px-3 sm:rounded-md hover:bg-primary-pink sm:hover:text-black"
-              onClick={handleLogout}
-            >
-              Logout
-            </button>
-          )} */}
         </div>
         <div onClick={handleToggleOpen} className="toggle sm:hidden ">
           <div className={`${open ? "hidden" : ""}`}>

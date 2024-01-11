@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
@@ -16,6 +16,8 @@ function Login() {
   }, []);
 
   const dispatch = useDispatch();
+  const { state } = useLocation();
+  const { origin } = state ?? "";
 
   const navigate = useNavigate();
   const {
@@ -25,12 +27,13 @@ function Login() {
     reset,
   } = useForm({ mode: "onTouched" });
 
-  function handleNavigateLogin() {
-    navigate("/signup");
+  function handleNavigateSignUp() {
+    navigate("/signup", { state: { origin: "login" } });
   }
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
-      navigate("/");
+      const destination = origin === "signup" ? "/" : -1;
+      navigate(destination);
     }
   }
 
@@ -39,10 +42,9 @@ function Login() {
       return auth.signIn(data);
     },
     onSuccess: (data) => {
-      console.log("login success");
-      console.log(data);
       dispatch(LOGIN(data));
-      navigate("/");
+      const destination = origin === "signup" ? "/" : -1;
+      navigate(destination);
     },
     onError: (error) => {
       console.log(error);
@@ -135,7 +137,7 @@ function Login() {
           Dont have an account?{" "}
           <span
             className="font-semibold underline italic cursor-pointer hover:text-primary-pink "
-            onClick={handleNavigateLogin}
+            onClick={handleNavigateSignUp}
           >
             Sign-up
             {/* <Link to={"/"}>Signup</Link> */}

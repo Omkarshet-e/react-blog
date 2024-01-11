@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
+
 import { useLocation } from "react-router-dom";
+
 import { Loading } from "../components";
 
 function BlogPost() {
+  const [imgSrc, setImgSrc] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const { state } = useLocation();
+  const { userId, title, content, img, $id } = state;
   useEffect(() => {
     document.title = title;
     return () => (document.title = "React Blog");
-  }, []);
-  const [imgSrc, setImgSrc] = useState(null);
-  // const [loading, setLoading] = useState(true);
-  const { state } = useLocation();
-  const { userId, title, content, img } = state;
+  }, [title]);
+
   useEffect(() => {
+    setLoading(true);
     setImgSrc(JSON.parse(img));
-    // return () => setLoading(false);
+    setLoading(false);
   }, [img]);
-  // if (loading) {
-  //   return <Loading />;
-  // }
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className="w-full py-2">
       <div className="lg:max-w-[calc(88%-4rem)] lg:mx-auto w-full max-lg:px-8 pt-6 ">

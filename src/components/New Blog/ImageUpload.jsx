@@ -31,7 +31,6 @@ function ImageUpload({ setImageFileData }) {
         {!file && (
           <div className="w-full h-full bg-dark-primary-black flex justify-center items-center ">
             <div className="flex flex-col items-center">
-              {/* <FaImages color="white" opacity="0.6" size={200} /> */}
               <FaImages className="text-white/60 xl:text-[13rem] lg:text-9xl md:text-8xl text-8xl " />
               <h1 className="text-white/40 max-sm:text-sm">
                 {" "}
@@ -40,6 +39,7 @@ function ImageUpload({ setImageFileData }) {
             </div>
           </div>
         )}
+
         {file && (
           <img
             src={file}
@@ -47,6 +47,7 @@ function ImageUpload({ setImageFileData }) {
             className="w-full  h-full object-cover bg-gradient-to-t from-black to-white"
           />
         )}
+
         {file && (
           <div className="absolute top-0 left-0 right-0 h-2/3 bg-gradient-to-t from-transparent to-dark-variant-gray text-white flex items-start justify-between">
             <h1 className=" w-3/4  truncate m-2 px-2 ">{imageName}</h1>
@@ -59,6 +60,7 @@ function ImageUpload({ setImageFileData }) {
           </div>
         )}
       </div>
+
       <form id="form">
         <input
           className={` rounded-full bg-dark-variant-gray max-w-64 sm:max-w-full

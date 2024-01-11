@@ -1,12 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
-import Input from "../components/Input";
-import { useForm } from "react-hook-form";
-import { FaTimesCircle } from "react-icons/fa";
 import { useEffect } from "react";
-import auth from "../appwrite/auth";
-import { useMutation } from "@tanstack/react-query";
-import { Error, Loading } from "../components";
+
 import { useDispatch } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { FaTimesCircle } from "react-icons/fa";
+
+import Input from "../components/Input";
+import { Error, Loading } from "../components";
+import auth from "../appwrite/auth";
 import { LOGIN } from "../state/userSlice";
 
 function Signup() {
@@ -16,21 +18,24 @@ function Signup() {
   }, []);
 
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
+
+  const { state } = useLocation();
+  const { origin } = state ?? "";
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({ mode: "onTouched" });
 
   function handleNavigateLogin() {
-    navigate("/login");
+    navigate("/login", { state: { origin: "signup" } });
   }
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
-      navigate("/");
+      const destination = origin === "login" ? "/" : -1;
+      navigate(destination);
     }
   }
   const loginMutation = useMutation({
@@ -38,10 +43,9 @@ function Signup() {
       return auth.signIn(data);
     },
     onSuccess: (data) => {
-      console.log("login success");
-      console.log(data);
       dispatch(LOGIN(data));
-      navigate("/");
+      const destination = origin === "login" ? "/" : -1;
+      navigate(destination);
     },
     onError: (error) => {
       console.log(error);
@@ -55,26 +59,21 @@ function Signup() {
     mutationFn: (data) => {
       return auth.signup(data);
     },
-    onSuccess: (data) => {
-      console.log("signup success");
-      console.log(data);
-      navigate("/");
-    },
     onError: (error) => {
-      console.log(error);
-      console.log(error.message);
       if (
         error.message ===
         "A user with the same id, email, or phone already exists in this project."
       ) {
         navigate("/error", {
-          state: { title: "Error", message: "User Already Exists" },
+          state: { message: "User Already Exists" },
         });
         setTimeout(() => {
           {
             window.alert("User Already Exists");
           }
         }, 10);
+      } else {
+        navigate("/error", { state: { message: "Signup Error" } });
       }
     },
   });
@@ -87,8 +86,6 @@ function Signup() {
         loginMutation.mutate({ email, password });
       },
     });
-    document.activeElement.blur();
-    reset();
   }
 
   if (signupMutation.isPending) {

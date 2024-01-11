@@ -1,11 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import db from "../../appwrite/database";
-import { useSelector } from "react-redux";
-import storage from "../../appwrite/storage";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+
+import storage from "../../appwrite/storage";
 import Loading from "../Loading";
 import Error from "../Error";
+import db from "../../appwrite/database";
 /* eslint-disable react/prop-types */
 
 function BlogData({ imageFileData }) {
@@ -16,6 +17,7 @@ function BlogData({ imageFileData }) {
   } = useForm({
     reValidateMode: "onChange",
   });
+
   const userId = useSelector((state) => state.user.userData.userId);
   const navigate = useNavigate();
 
@@ -23,11 +25,10 @@ function BlogData({ imageFileData }) {
     mutationFn: (data) => {
       return db.createDocument({ ...data, userId });
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       navigate("/blogs");
     },
-    onError: (error) => {
-      console.log(error);
+    onError: () => {
       navigate("/error", {
         state: {
           message:
@@ -45,8 +46,7 @@ function BlogData({ imageFileData }) {
       console.log(error);
       navigate("/error", {
         state: {
-          message:
-            "An error occurred while uploading the blog. Try again later",
+          message: "An error occurred while uploading the Image.",
         },
       });
     },
@@ -61,12 +61,11 @@ function BlogData({ imageFileData }) {
         },
       });
     } else {
-      alert("Upload a image to continue");
-      //todo upload image alert
+      alert("Upload an image to continue");
     }
   }
 
-  const isLoading = blogMutation.isLoading || imageFileMutation.isLoading;
+  const isLoading = blogMutation.isPending || imageFileMutation.isPending;
   const isError = blogMutation.isError || imageFileMutation.isError;
 
   if (isLoading) {

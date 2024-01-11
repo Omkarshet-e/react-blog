@@ -1,8 +1,10 @@
-import { FaLongArrowAltLeft } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import { FaLongArrowAltLeft } from "react-icons/fa";
+
 function Error() {
-  const navigate = useNavigate();
   const { state } = useLocation();
+  const navigate = useNavigate();
 
   return (
     <div className="bg-black w-full text-primary-pink">

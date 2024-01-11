@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
-import { FaLongArrowAltRight } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
+
+import { FaLongArrowAltRight } from "react-icons/fa";
+
 import storage from "../../appwrite/storage";
 import Loading from "../Loading";
 import Error from "../Error";
-import { useEffect } from "react";
+
 function BlogCard({ title, content, imageId, userId, $id }) {
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ function BlogCard({ title, content, imageId, userId, $id }) {
   }
   function handleBlogPost() {
     navigate(`/blog/${title}`, {
-      state: { userId, title, content, img: JSON.stringify(imgSrc) },
+      state: { userId, title, content, img: JSON.stringify(imgSrc), $id },
     });
   }
 

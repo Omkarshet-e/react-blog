@@ -13,18 +13,13 @@ class DatabaseService {
   }
 
   async createDocument(data) {
-    //   todo : - pass in { title, content, imageId ,userId} ****
-    try {
-      const document = await this.database.createDocument(
-        dbId,
-        collectionId,
-        ID.unique(),
-        data
-      );
-      return document;
-    } catch (error) {
-      console.log("appwrite error::createDocument error", error);
-    }
+    const document = await this.database.createDocument(
+      dbId,
+      collectionId,
+      ID.unique(),
+      data
+    );
+    return document;
   }
 
   async getDocument($id) {
@@ -38,26 +33,21 @@ class DatabaseService {
 
   async getAllDocuments() {
     const docList = await this.database.listDocuments(dbId, collectionId, [
-      Query.orderDesc("title"),
+      // Query.orderDesc("title"),
+      Query.orderDesc("$createdAt"),
     ]);
     return docList;
   }
 
   async updateDocument($id, data) {
-    try {
-      const document = this.database.updateDocument(
-        dbId,
-        collectionId,
-        $id,
-        data
-      );
-      return document;
-    } catch (error) {
-      console.log("appwrite error::updateDocument error", error);
-    }
+    const document = this.database.updateDocument(
+      dbId,
+      collectionId,
+      $id,
+      data
+    );
+    return document;
   }
-
-  //   async deleteDocument() {}
 }
 
 const db = new DatabaseService();
