@@ -48,7 +48,7 @@ function Login() {
     },
     onError: (error) => {
       console.log(error);
-      navigate("/error");
+      navigate("/error", { state: { message: "Error Logging-In" } });
     },
   });
 
