@@ -35,12 +35,16 @@ function BlogPost() {
         >
           <img
             src={imgSrc}
+            loading="lazy"
             alt=""
             className={`w-full h-full rounded-lg border-2 border-dark-primary-black ${
               imgLoading ? "" : ""
             }`}
             onLoad={() => setImgLoading(false)}
-            onError={() => setImgLoading(false)}
+            onError={() => {
+              setImgLoading(false);
+              setImgSrc("/assets/placeholder.png");
+            }}
           />
         </div>
         <div className="w-4/5 mx-auto mt-8 divide-y-2 divide-white/40">
