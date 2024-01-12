@@ -32,7 +32,8 @@ function Login() {
   }
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
-      navigate("/blogs");
+      const destination = origin === "signup" ? "/" : -1;
+      navigate(destination);
     }
   }
 
@@ -42,8 +43,7 @@ function Login() {
     },
     onSuccess: (data) => {
       dispatch(LOGIN(data));
-      const destination = origin === "signup" ? "/blogs" : -1;
-      navigate(destination);
+      navigate("/blogs");
     },
     onError: () => {
       navigate("/error", { state: { message: "Error Logging-In" } });
