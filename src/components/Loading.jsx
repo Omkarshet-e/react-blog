@@ -8,8 +8,7 @@ function Loading() {
     async function wait() {
       handler = setTimeout(() => {
         navigate("/error", {
-          replace: true,
-          state: { title: "An error occurred. Please try again later" },
+          state: { message: "An error occurred. Please try again later" },
         });
       }, 40 * 1000);
     }
