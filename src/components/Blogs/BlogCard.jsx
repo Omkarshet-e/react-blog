@@ -42,12 +42,12 @@ function BlogCard({ title, content, imageId, userId, $id }) {
   return (
     <div
       onClick={handleBlogPost}
-      className="  py-3 px-2 bg-dark-primary-black max-sm:aspect-[10/10] aspect-[10/6] rounded-lg ease-in-out duration-200  flex flex-col justify-between gap-5 hover:scale-[1.02] cursor-pointer  "
+      className="  py-3 px-2 bg-dark-primary-black aspect-[10/6] rounded-lg ease-in-out duration-200  flex flex-col justify-between gap-5 hover:scale-[1.02] cursor-pointer  "
     >
       <div>
         <div
           className={`relative image w-full p-2 aspect-video text-white/70 overflow-hidden  
-          before:bg-white/15 before:absolute  before:inset-0 before:m-2 before:rounded-lg before: z-10 ${
+          before:bg-white/20 before:absolute  before:inset-0 before:m-2 before:rounded-lg ${
             imgLoading ? "animate-pulse" : "before:hidden"
           }`}
         >
@@ -68,7 +68,7 @@ function BlogCard({ title, content, imageId, userId, $id }) {
             </h1>
           </div>
           <div className="py-1 ">
-            <p className="line-clamp-2 leading-5 text-base  font-medium text-white/75">
+            <p className="line-clamp-2 text-base h-[3rem] font-medium text-white/75">
               {content}
             </p>
           </div>
