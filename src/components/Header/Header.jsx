@@ -76,7 +76,7 @@ function Header() {
         <div
           id="overlay"
           onClick={handleToggleOverlay}
-          className={`fixed inset-0 bg-dark-primary-black/40 z-10 ${
+          className={`fixed inset-0 sm:hidden bg-dark-primary-black/40 z-10 ${
             open ? "" : "hidden"
           }`}
         ></div>
