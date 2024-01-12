@@ -15,6 +15,7 @@ import Signup from "./pages/Signup.jsx";
 import Error from "./components/Error.jsx";
 import store from "./state/store.js";
 import "./index.css";
+import Logout from "./pages/Logout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/logout",
+        element: <Logout />,
       },
       {
         path: "error",

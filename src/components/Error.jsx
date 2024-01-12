@@ -18,9 +18,9 @@ function Error() {
           </p>
           <button
             className="bg-primary-pink text-black font-semibold w-fit h-fit flex items-center gap-3 px-5 py-2 rounded-xl"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/")}
           >
-            <FaLongArrowAltLeft size={20} /> Go Back
+            <FaLongArrowAltLeft size={20} /> Go Back to Home
           </button>
         </div>
       </div>

@@ -1,27 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { FaBars, FaTimes } from "react-icons/fa";
-
-import auth from "../../appwrite/auth";
-import { LOGOUT } from "../../state/userSlice";
 
 function Header() {
   const [open, setOpen] = useState(false);
   const authStatus = useSelector((state) => state.user.isUser);
-  const dispatch = useDispatch();
 
   function handleToggleOpen() {
     setOpen((open) => !open);
-  }
-
-  async function handleLogout() {
-    dispatch(LOGOUT());
-    const activeSession = await auth.getUser();
-    if (activeSession) {
-      await auth.signOut();
-    }
   }
 
   function handleToggleOverlay(e) {
@@ -106,7 +94,7 @@ function Header() {
                   onClick={handleToggleOpen}
                 >
                   {item.item === "Logout" && (
-                    <button onClick={handleLogout}>{item.item}</button>
+                    <Link to={"/logout"}>{item.item}</Link>
                   )}
                   {item.item !== "Logout" && (
                     <Link to={item.path}>{item.item}</Link>
