@@ -11,7 +11,7 @@ function Loading() {
           replace: true,
           state: { title: "An error occurred. Please try again later" },
         });
-      }, 12 * 1000);
+      }, 40 * 1000);
     }
     wait();
     return () => clearTimeout(handler);
