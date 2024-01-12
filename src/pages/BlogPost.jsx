@@ -29,7 +29,7 @@ function BlogPost() {
     <div className="w-full py-2">
       <div className="lg:max-w-[calc(88%-4rem)] lg:mx-auto w-full max-lg:px-8 pt-6  ">
         <div
-          className={`relative img w-3/5 max-xl:w-4/5 mx-auto before:bg-black/25 before:absolute  before:inset-0 before:rounded-lg before: z-10 ${
+          className={`relative bg-dark-variant-gray rounded-lg img w-3/5 max-xl:w-4/5 mx-auto before:bg-black/25 before:absolute  before:inset-0 before:rounded-lg before: z-10 ${
             imgLoading ? "animate-pulse" : "before:hidden"
           }`}
         >
