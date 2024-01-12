@@ -47,7 +47,7 @@ function BlogPost() {
             }}
           />
         </div>
-        <div className="w-4/5 mx-auto mt-8 divide-y-2 divide-white/40">
+        <div className="w-4/5 mx-auto mt-8 divide-y-2 divide-white/40 break-words">
           <div className="p-2 text-2xl max-sm:text-xl  max-sm:-tracking-tighter tracking-wide font-bold capitalize">
             {title}
           </div>
