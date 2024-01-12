@@ -91,7 +91,13 @@ function BlogData({ imageFileData }) {
             </span>
           )}
           <input
-            {...register("title", { required: "* Title required" })}
+            {...register("title", {
+              required: "* Title required",
+              minLength: {
+                value: 15,
+                message: "* Title should have atleast 15 characters",
+              },
+            })}
             type="text"
             className=" focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-transparent focus:ring-dark-primary-black rounded-lg w-full px-3 py-2 mb-2
          bg-dark-variant-gray text-white font-sans"
@@ -111,7 +117,13 @@ function BlogData({ imageFileData }) {
             </span>
           )}
           <textarea
-            {...register("content", { required: "* Content required" })}
+            {...register("content", {
+              required: "* Content required",
+              minLength: {
+                value: 25,
+                message: "* Content should be atleast 25 chracters",
+              },
+            })}
             name="content"
             id=""
             className="h-full focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-transparent focus:ring-dark-primary-black rounded-lg w-full px-3 py-2 bg-dark-variant-gray text-white font-sans resize-none "
