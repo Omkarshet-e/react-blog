@@ -23,6 +23,13 @@ function Header() {
       await auth.signOut();
     }
   }
+
+  function handleToggleOverlay(e) {
+    if (e.target.id === "overlay" || e.target.id === "linksBg") {
+      setOpen(false);
+    }
+  }
+
   const navItems = [
     {
       path: "/",
@@ -67,9 +74,18 @@ function Header() {
           </div>
         </Link>
         <div
+          id="overlay"
+          onClick={handleToggleOverlay}
+          className={`fixed inset-0 bg-dark-primary-black/40 z-10 ${
+            open ? "" : "hidden"
+          }`}
+        ></div>
+        <div
+          id="overlay"
+          onClick={handleToggleOverlay}
           className={`${
             open ? "max-sm:translate-x-0" : "max-sm:translate-x-full"
-          } sm:flex sm:items-center lg:gap-12 sm:gap-4 md:gap-6 xl:text-xl sm:text-base max-sm:fixed top-0 right-0 bottom-0 max-sm:h-full max-sm:w-2/3 max-sm:bg-black max-sm:flex max-sm:flex-col max-sm:pt-2 max-sm:divide-y-2 max-sm:divide-white/30  max-sm:rounded-tl-xl max-sm:rounded-bl-xl max-sm:z-10 duration-150 ease-in-out `}
+          } sm:flex sm:items-center lg:gap-12 sm:gap-4 md:gap-6 xl:text-xl sm:text-base max-sm:fixed inset-0 max-sm:w-[80%] max-sm:ml-auto max-sm:bg-black max-sm:flex max-sm:flex-col max-sm:pt-2 max-sm:divide-y-2 max-sm:divide-white/30  max-sm:rounded-tl-xl max-sm:rounded-bl-xl max-sm:z-50 duration-150 ease-in-out `}
         >
           <div className="text-center py-4 sm:hidden">React Blog</div>
           {navItems.map((item) => {
@@ -99,11 +115,12 @@ function Header() {
               );
           })}
         </div>
+
         <div onClick={handleToggleOpen} className="toggle sm:hidden ">
           <div className={`${open ? "hidden" : ""}`}>
             <FaBars size={25} />
           </div>
-          <div className={`z-10 ${!open ? "hidden" : "fixed top-6 right-2"}`}>
+          <div className={`z-50 ${!open ? "hidden" : "fixed top-6 right-2"}`}>
             <FaTimes size={25} />
           </div>
         </div>
