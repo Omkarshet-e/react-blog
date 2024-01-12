@@ -7,9 +7,11 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import storage from "../../appwrite/storage";
 import Loading from "../Loading";
 import Error from "../Error";
+import { useState } from "react";
 
 function BlogCard({ title, content, imageId, userId, $id }) {
   const navigate = useNavigate();
+  const [imgLoading, setImgLoading] = useState(true);
 
   const {
     data: imgSrc,
@@ -40,14 +42,23 @@ function BlogCard({ title, content, imageId, userId, $id }) {
   return (
     <div
       onClick={handleBlogPost}
-      className="  py-3 px-2 bg-dark-primary-black max-sm:aspect-[10/10] aspect-[10/12] rounded-lg ease-in-out duration-200  flex flex-col justify-between gap-5 hover:scale-[1.02] cursor-pointer"
+      className="  py-3 px-2 bg-dark-primary-black max-sm:aspect-[10/10] aspect-[10/6] rounded-lg ease-in-out duration-200  flex flex-col justify-between gap-5 hover:scale-[1.02] cursor-pointer  "
     >
       <div>
-        <div className="image w-full p-2 aspect-video">
+        <div
+          className={`relative image w-full p-2 aspect-video text-white/70 overflow-hidden  
+          before:bg-white/15 before:absolute  before:inset-0 before:m-2 before:rounded-lg before: z-10 ${
+            imgLoading ? "animate-pulse" : "before:hidden"
+          }`}
+        >
           <img
             src={imgSrc}
             alt={title}
-            className="w-full h-full object-cover border-2 rounded-lg"
+            onLoad={() => setImgLoading(false)}
+            onError={() => setImgLoading(false)}
+            className={`w-full h-full object-cover border-2 rounded-lg ${
+              imgLoading ? "hidden" : ""
+            }`}
           />
         </div>
         <div className="px-2  ">

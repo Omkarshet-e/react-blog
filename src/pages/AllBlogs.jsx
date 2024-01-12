@@ -22,6 +22,7 @@ function AllBlogs() {
   } = useQuery({
     queryKey: ["blogList"],
     queryFn: getBlogsList,
+    staleTime: 60 * 1000,
   });
 
   async function getBlogsList() {

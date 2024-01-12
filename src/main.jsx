@@ -15,6 +15,7 @@ import Signup from "./pages/Signup.jsx";
 import Error from "./components/Error.jsx";
 import store from "./state/store.js";
 import "./index.css";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const router = createBrowserRouter([
   {
@@ -75,6 +76,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </Provider>
 );

@@ -7,6 +7,7 @@ import { Loading } from "../components";
 function BlogPost() {
   const [imgSrc, setImgSrc] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [imgLoading, setImgLoading] = useState(true);
   const { state } = useLocation();
   const { userId, title, content, img, $id } = state;
   useEffect(() => {
@@ -26,9 +27,21 @@ function BlogPost() {
 
   return (
     <div className="w-full py-2">
-      <div className="lg:max-w-[calc(88%-4rem)] lg:mx-auto w-full max-lg:px-8 pt-6 ">
-        <div className="img w-3/5 max-xl:w-4/5 mx-auto ">
-          <img src={imgSrc} alt="" className="w-full h-full" />
+      <div className="lg:max-w-[calc(88%-4rem)] lg:mx-auto w-full max-lg:px-8 pt-6  ">
+        <div
+          className={`relative img w-3/5 max-xl:w-4/5 mx-auto before:bg-black/25 before:absolute  before:inset-0 before:rounded-lg before: z-10 ${
+            imgLoading ? "animate-pulse" : "before:hidden"
+          }`}
+        >
+          <img
+            src={imgSrc}
+            alt=""
+            className={`w-full h-full rounded-lg border-2 border-dark-primary-black ${
+              imgLoading ? "" : ""
+            }`}
+            onLoad={() => setImgLoading(false)}
+            onError={() => setImgLoading(false)}
+          />
         </div>
         <div className="w-4/5 mx-auto mt-8 divide-y-2 divide-white/40">
           <div className="p-2 text-2xl max-sm:text-xl  max-sm:-tracking-tighter tracking-wide font-bold capitalize">
