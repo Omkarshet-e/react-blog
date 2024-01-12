@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -17,6 +17,13 @@ function Header() {
       setOpen(false);
     }
   }
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add("overflow-y-hidden");
+    } else {
+      document.body.classList.remove("overflow-y-hidden");
+    }
+  }, [open]);
 
   const navItems = [
     {
@@ -73,7 +80,7 @@ function Header() {
           onClick={handleToggleOverlay}
           className={`${
             open ? "max-sm:translate-x-0" : "max-sm:translate-x-full"
-          } sm:flex sm:items-center lg:gap-12 sm:gap-4 md:gap-6 xl:text-xl sm:text-base max-sm:fixed inset-0 max-sm:w-[80%] max-sm:ml-auto max-sm:bg-black max-sm:flex max-sm:flex-col max-sm:pt-2 max-sm:divide-y-2 max-sm:divide-white/30  max-sm:rounded-tl-xl max-sm:rounded-bl-xl max-sm:z-50 duration-150 ease-in-out `}
+          } sm:flex sm:items-center lg:gap-12 sm:gap-4 md:gap-6 xl:text-xl sm:text-base max-sm:fixed inset-0 max-sm:w-[80%] max-sm:ml-auto max-sm:bg-black max-sm:flex max-sm:flex-col max-sm:pt-2 max-sm:divide-y-2 max-sm:divide-white/30  max-sm:rounded-tl-xl max-sm:rounded-bl-xl max-sm:z-50 duration-150 ease-in-out overscroll-none `}
         >
           <div className="text-center py-4 sm:hidden">React Blog</div>
           {navItems.map((item) => {
