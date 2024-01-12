@@ -13,15 +13,15 @@ function Header() {
   }
 
   function handleToggleOverlay(e) {
-    if (e.target.id === "overlay" || e.target.id === "linksBg") {
+    if (e.target.id === "overlay" || e.target.id === "links-bg") {
       setOpen(false);
     }
   }
   useEffect(() => {
     if (open) {
-      document.body.classList.add("overflow-y-hidden");
+      document.body.classList.add("max-sm:overflow-y-hidden");
     } else {
-      document.body.classList.remove("overflow-y-hidden");
+      document.body.classList.remove("max-sm:overflow-y-hidden");
     }
   }, [open]);
 
@@ -76,11 +76,11 @@ function Header() {
           }`}
         ></div>
         <div
-          id="overlay"
+          id="links-bg"
           onClick={handleToggleOverlay}
           className={`${
             open ? "max-sm:translate-x-0" : "max-sm:translate-x-full"
-          } sm:flex sm:items-center lg:gap-12 sm:gap-4 md:gap-6 xl:text-xl sm:text-base max-sm:fixed inset-0 max-sm:w-[80%] max-sm:ml-auto max-sm:bg-black max-sm:flex max-sm:flex-col max-sm:pt-2 max-sm:divide-y-2 max-sm:divide-white/30  max-sm:rounded-tl-xl max-sm:rounded-bl-xl max-sm:z-50 duration-150 ease-in-out overscroll-none `}
+          } sm:flex sm:items-center lg:gap-12 sm:gap-4 md:gap-6 xl:text-xl sm:text-base max-sm:fixed inset-0 max-sm:w-[80%] max-sm:ml-auto max-sm:bg-black max-sm:flex max-sm:flex-col max-sm:pt-2 max-sm:divide-y-2 max-sm:divide-white/30  max-sm:rounded-tl-xl max-sm:rounded-bl-xl max-sm:z-50 duration-150 ease-in-out `}
         >
           <div className="text-center py-4 sm:hidden">React Blog</div>
           {navItems.map((item) => {
