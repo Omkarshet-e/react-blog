@@ -32,8 +32,7 @@ function Login() {
   }
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
-      const destination = origin === "signup" ? "/" : -1;
-      navigate(destination);
+      navigate("/blogs");
     }
   }
 

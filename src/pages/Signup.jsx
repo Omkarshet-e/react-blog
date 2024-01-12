@@ -44,8 +44,7 @@ function Signup() {
     },
     onSuccess: (data) => {
       dispatch(LOGIN(data));
-      const destination = origin === "login" ? "/blogs" : -1;
-      navigate(destination);
+      navigate("/blogs");
     },
     onError: () => {
       navigate("/error", { state: { message: "Error Signing-In" } });
