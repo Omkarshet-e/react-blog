@@ -19,7 +19,7 @@ function Login() {
 
   const dispatch = useDispatch();
   const loginState = useLocation();
-  const { from = null, origin = null } = loginState.state || {};
+  const { from = null } = loginState.state || {};
 
   const navigate = useNavigate();
   const {
@@ -37,8 +37,7 @@ function Login() {
 
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
-      const destination = origin === "signup" ? "/" : -1;
-      navigate(destination);
+      navigate("/");
     }
   }
 

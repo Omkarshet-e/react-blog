@@ -22,7 +22,7 @@ function Signup() {
   const navigate = useNavigate();
 
   const signUpState = useLocation();
-  const { from = null, origin = null } = signUpState.state || {};
+  const { from = null } = signUpState.state || {};
 
   const {
     register,
@@ -37,8 +37,7 @@ function Signup() {
   }
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
-      const destination = origin === "login" ? "/" : -1;
-      navigate(destination);
+      navigate("/");
     }
   }
   const loginMutation = useMutation({
