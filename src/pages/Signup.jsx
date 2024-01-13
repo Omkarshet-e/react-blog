@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
@@ -16,12 +16,14 @@ function Signup() {
     document.title = "Sign Up";
     return () => (document.title = "React Blog");
   }, []);
+  const isLoggedIn = useSelector((state) => state.user.isUser);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { state } = useLocation();
-  const { origin } = state ?? "";
+  const { origin = null, location = null } = state ?? {};
+  console.log(origin, location);
 
   const {
     register,
@@ -30,11 +32,12 @@ function Signup() {
   } = useForm({ mode: "onTouched" });
 
   function handleNavigateLogin() {
-    navigate("/login", { state: { origin: "signup" } });
+    navigate("/login", { state: { origin: "signup", location } });
   }
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
       const destination = origin === "login" ? "/" : -1;
+      console.log(destination);
       navigate(destination);
     }
   }
@@ -75,6 +78,10 @@ function Signup() {
   });
 
   async function handleSignUp(data) {
+    if (isLoggedIn) {
+      navigate("/error", { state: { message: "User already Logged-In" } });
+      return;
+    }
     signupMutation.mutate(data, {
       onSuccess: () => {
         const { email, password } = data;

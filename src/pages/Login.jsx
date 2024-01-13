@@ -6,7 +6,7 @@ import { FaTimesCircle } from "react-icons/fa";
 import { useMutation } from "@tanstack/react-query";
 import { Error, Loading } from "../components";
 import auth from "../appwrite/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LOGIN } from "../state/userSlice";
 
 function Login() {
@@ -15,9 +15,12 @@ function Login() {
     return () => (document.title = "React Blog");
   }, []);
 
+  const isLoggedIn = useSelector((state) => state.user.isUser);
+
   const dispatch = useDispatch();
   const { state } = useLocation();
-  const { origin } = state ?? "";
+  const { origin = null, location = null } = state ?? {};
+  console.log(origin, location);
 
   const navigate = useNavigate();
   const {
@@ -28,11 +31,13 @@ function Login() {
   } = useForm({ mode: "onTouched" });
 
   function handleNavigateSignUp() {
-    navigate("/signup", { state: { origin: "login" } });
+    navigate("/signup", { state: { origin: "login", location } });
   }
+
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
       const destination = origin === "signup" ? "/" : -1;
+      console.log(destination);
       navigate(destination);
     }
   }
@@ -51,6 +56,10 @@ function Login() {
   });
 
   function handleSignIn(data) {
+    if (isLoggedIn) {
+      navigate("/error", { state: { message: "User already Logged-In" } });
+      return;
+    }
     loginMutation.mutate(data);
     document.activeElement.blur();
     reset();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Loading from "../components/Loading";
 
@@ -10,6 +10,8 @@ function AuthLayout({ children }) {
   const [loading, setLoading] = useState(true);
   const auth = useSelector((state) => state.user.isUser);
   const navigate = useNavigate();
+  const { state } = useLocation();
+  console.log(state);
 
   useEffect(() => {
     if (!auth) {
