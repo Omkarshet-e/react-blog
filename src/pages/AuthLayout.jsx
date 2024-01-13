@@ -10,16 +10,15 @@ function AuthLayout({ children }) {
   const [loading, setLoading] = useState(true);
   const auth = useSelector((state) => state.user.isUser);
   const navigate = useNavigate();
-  const { state } = useLocation();
-  console.log(state);
+  const state = useLocation();
 
   useEffect(() => {
     if (!auth) {
-      navigate("/signup", { replace: true, state: { origin: "authLayout" } });
+      navigate("/signup", { state: { from: state.pathname } });
     } else {
       setLoading(false);
     }
-  }, [auth, navigate]);
+  }, [auth, navigate, state]);
 
   if (loading) {
     return <Loading />;

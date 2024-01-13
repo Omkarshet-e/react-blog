@@ -21,9 +21,8 @@ function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { state } = useLocation();
-  const { origin = null, location = null } = state ?? {};
-  console.log(origin, location);
+  const signUpState = useLocation();
+  const { from = null, origin = null } = signUpState.state || {};
 
   const {
     register,
@@ -32,12 +31,13 @@ function Signup() {
   } = useForm({ mode: "onTouched" });
 
   function handleNavigateLogin() {
-    navigate("/login", { state: { origin: "signup", location } });
+    navigate("/login", {
+      state: { origin: "signup", from: from ?? null },
+    });
   }
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
       const destination = origin === "login" ? "/" : -1;
-      console.log(destination);
       navigate(destination);
     }
   }
@@ -47,7 +47,7 @@ function Signup() {
     },
     onSuccess: (data) => {
       dispatch(LOGIN(data));
-      navigate("/blogs");
+      navigate(from ?? "/");
     },
     onError: () => {
       navigate("/error", { state: { message: "Error Signing-In" } });

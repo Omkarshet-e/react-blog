@@ -18,9 +18,8 @@ function Login() {
   const isLoggedIn = useSelector((state) => state.user.isUser);
 
   const dispatch = useDispatch();
-  const { state } = useLocation();
-  const { origin = null, location = null } = state ?? {};
-  console.log(origin, location);
+  const loginState = useLocation();
+  const { from = null, origin = null } = loginState.state || {};
 
   const navigate = useNavigate();
   const {
@@ -31,13 +30,14 @@ function Login() {
   } = useForm({ mode: "onTouched" });
 
   function handleNavigateSignUp() {
-    navigate("/signup", { state: { origin: "login", location } });
+    navigate("/signup", {
+      state: { origin: "login", from: from ?? null },
+    });
   }
 
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
       const destination = origin === "signup" ? "/" : -1;
-      console.log(destination);
       navigate(destination);
     }
   }
@@ -48,7 +48,7 @@ function Login() {
     },
     onSuccess: (data) => {
       dispatch(LOGIN(data));
-      navigate("/blogs");
+      navigate(from ?? "/");
     },
     onError: () => {
       navigate("/error", { state: { message: "Error Logging-In" } });
