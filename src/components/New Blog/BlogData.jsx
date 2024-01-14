@@ -26,7 +26,7 @@ function BlogData({ imageFileData }) {
       return db.createDocument({ ...data, userId });
     },
     onSuccess: () => {
-      navigate("/blogs");
+      navigate("/blogs", { state: { invalidate: true } });
     },
     onError: () => {
       navigate("/error", {

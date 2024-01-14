@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import BlogCard from "../components/Blogs/BlogCard";
 import { Loading } from "../components";
@@ -14,6 +14,8 @@ function AllBlogs() {
   }, []);
 
   const navigate = useNavigate();
+  const { state } = useLocation();
+  let { invalidate = false } = state || {};
 
   const {
     isError,
@@ -22,10 +24,11 @@ function AllBlogs() {
   } = useQuery({
     queryKey: ["blogList"],
     queryFn: getBlogsList,
-    staleTime: 60 * 1000,
+    staleTime: invalidate ? 0 : 60 * 1000,
   });
 
   async function getBlogsList() {
+    invalidate = false;
     const response = await db.getAllDocuments();
     return response.documents;
   }
