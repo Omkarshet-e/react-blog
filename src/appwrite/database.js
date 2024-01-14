@@ -44,6 +44,9 @@ class DatabaseService {
     );
     return document;
   }
+  async deleteDocument(id) {
+    return await this.database.deleteDocument(dbId, collectionId, id);
+  }
 }
 
 const db = new DatabaseService();
