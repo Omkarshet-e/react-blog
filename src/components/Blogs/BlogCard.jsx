@@ -27,7 +27,7 @@ function BlogCard({ title, content, imageId, userId, $id }) {
     return src.href;
   }
   function handleBlogPost() {
-    navigate(`/blog/${title}`, {
+    navigate(`/blog/${$id}`, {
       state: { userId, title, content, img: JSON.stringify(imgSrc), $id },
     });
   }
