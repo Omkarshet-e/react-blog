@@ -51,10 +51,17 @@ function BlogData({ imageFileData }) {
     },
   });
 
+  function convertText(string) {
+    string = String(string);
+    return `<p>${string.replaceAll("\n", "<br />")}</p>`;
+  }
+
   function submitBlog(data) {
+    data.content = convertText(data.content);
     if (imageFileData) {
       imageFileMutation.mutate(imageFileData, {
         onSuccess: (imageData) => {
+          console.log(data);
           const imageId = imageData.$id;
           blogMutation.mutate({ ...data, imageId });
         },

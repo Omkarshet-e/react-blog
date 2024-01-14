@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
+import parse from "html-react-parser";
 
 import { Loading } from "../components";
 
@@ -52,7 +53,7 @@ function BlogPost() {
             {title}
           </div>
           <div className="p-2 mb-8 text-lg max-xl:text-base max-sm:text-sm font-medium">
-            <p>{content}</p>
+            {parse(content)}
           </div>
         </div>
       </div>

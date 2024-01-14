@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { FaLongArrowAltRight } from "react-icons/fa";
+import parse from "html-react-parser";
 
 import storage from "../../appwrite/storage";
 import Loading from "../Loading";
@@ -69,7 +70,7 @@ function BlogCard({ title, content, imageId, userId, $id }) {
           </div>
           <div className="py-1 ">
             <p className="line-clamp-2 text-base h-[3rem] font-medium text-white/75">
-              {content}
+              {parse(content)}
             </p>
           </div>
         </div>
