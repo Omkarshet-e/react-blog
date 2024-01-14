@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import BlogCard from "../components/Blogs/BlogCard";
@@ -17,6 +17,8 @@ function AllBlogs() {
   const { state } = useLocation();
   let { invalidate = false } = state || {};
 
+  const queryClient = useQueryClient();
+
   const {
     isError,
     isLoading,
@@ -24,8 +26,14 @@ function AllBlogs() {
   } = useQuery({
     queryKey: ["blogList"],
     queryFn: getBlogsList,
-    staleTime: invalidate ? 0 : 60 * 1000,
+    staleTime: 60 * 1000,
   });
+
+  useEffect(() => {
+    if (invalidate) {
+      queryClient.invalidateQueries({ queryKey: ["blogList"] });
+    }
+  }, [queryClient, invalidate]);
 
   async function getBlogsList() {
     invalidate = false;
