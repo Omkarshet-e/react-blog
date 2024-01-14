@@ -69,9 +69,9 @@ function BlogCard({ title, content, imageId, userId, $id }) {
             </h1>
           </div>
           <div className="py-1 ">
-            <p className="line-clamp-2 text-base h-[3rem] font-medium text-white/75">
+            <div className="line-clamp-2 text-base h-[3rem] font-medium text-white/75">
               {parse(content)}
-            </p>
+            </div>
           </div>
         </div>
       </div>
