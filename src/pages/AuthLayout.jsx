@@ -14,7 +14,7 @@ function AuthLayout({ children }) {
 
   useEffect(() => {
     if (!auth) {
-      navigate("/signup", { state: { from: state.pathname } });
+      navigate("/signup", { state: { from: state.pathname }, replace: true });
     } else {
       setLoading(false);
     }
