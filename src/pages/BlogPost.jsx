@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import parse from "html-react-parser";
 
-import { Loading } from "../components";
+import { Error, Loading } from "../components";
 import db from "../appwrite/database";
 import { useSelector } from "react-redux";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import storage from "../appwrite/storage";
 
 function BlogPost() {
   const [imgSrc, setImgSrc] = useState(null);
@@ -14,7 +15,17 @@ function BlogPost() {
   const [imgLoading, setImgLoading] = useState(true);
   const [owner, setOwner] = useState(false);
   const { state } = useLocation();
-  const { userId, title, content, img, $id } = state;
+  const params = useParams();
+  console.log(params);
+  const {
+    userId = null,
+    title = null,
+    content = null,
+    img = null,
+    $id = null,
+  } = state || {};
+
+  const initialState = { userId, title, content, img, $id };
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.user.userData);
@@ -31,6 +42,34 @@ function BlogPost() {
     }
   }, [userData, userId]);
 
+  const { isError, isFetching, data } = useQuery({
+    queryKey: ["getBlog"],
+    queryFn: getBlogPost,
+    enabled: $id ? false : true,
+    initialData: initialState,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+  });
+  const imageId = data?.imageId;
+  const { data: imgQuery } = useQuery({
+    queryKey: ["imgSrc", imageId],
+    queryFn: getImgSrc,
+  });
+
+  function getImgSrc() {
+    const src = storage.getFilePreview(imageId);
+    return src.href;
+  }
+  async function getBlogPost() {
+    return await db.getDocument(params.id);
+  }
+
+  useEffect(() => {
+    console.log(data);
+    console.log("fetching", isFetching);
+    console.log("error", isError);
+  }, [data, isFetching, isError]);
   const mutation = useMutation({
     mutationFn: () => {
       return db.deleteDocument($id);
@@ -51,14 +90,19 @@ function BlogPost() {
   }
 
   useEffect(() => {
-    document.title = title;
+    document.title = title ?? data?.title ?? "React Blog";
     return () => (document.title = "React Blog");
-  }, [title]);
+  }, [title, data]);
 
   if (loading) {
     return <Loading />;
   }
-
+  if (isFetching) {
+    return <Loading />;
+  }
+  if (isError) {
+    return <Error />;
+  }
   return (
     <div className="w-full py-2">
       <div className="lg:max-w-[calc(88%-4rem)] lg:mx-auto w-full max-lg:px-8 pt-6 pb-10 ">
@@ -68,7 +112,7 @@ function BlogPost() {
           }`}
         >
           <img
-            src={imgSrc}
+            src={imgSrc ?? imgQuery}
             loading="lazy"
             alt=""
             className={`w-full h-full rounded-lg border-2 border-dark-primary-black ${
@@ -83,10 +127,10 @@ function BlogPost() {
         </div>
         <div className="w-4/5 mx-auto mt-8 divide-y-2 divide-white/40 break-words">
           <div className="p-2 text-2xl max-sm:text-xl  max-sm:-tracking-tighter tracking-wide font-bold capitalize">
-            {title}
+            {title ?? data?.title}
           </div>
           <div className="p-2 text-lg max-xl:text-base max-sm:text-sm font-medium">
-            {parse(content)}
+            {parse(content ?? data?.content ?? "")}
           </div>
         </div>
         <div className={`w-4/5 mx-auto text-right ${!owner ? "hidden" : ""}`}>
