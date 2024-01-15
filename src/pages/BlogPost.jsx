@@ -16,7 +16,6 @@ function BlogPost() {
   const [owner, setOwner] = useState(false);
   const { state } = useLocation();
   const params = useParams();
-  console.log(params);
   const {
     userId = null,
     title = null,
@@ -47,9 +46,6 @@ function BlogPost() {
     queryFn: getBlogPost,
     enabled: $id ? false : true,
     initialData: initialState,
-    onSuccess: (data) => {
-      console.log(data);
-    },
   });
   const imageId = data?.imageId;
   const { data: imgQuery } = useQuery({
@@ -65,17 +61,11 @@ function BlogPost() {
     return await db.getDocument(params.id);
   }
 
-  useEffect(() => {
-    console.log(data);
-    console.log("fetching", isFetching);
-    console.log("error", isError);
-  }, [data, isFetching, isError]);
   const mutation = useMutation({
     mutationFn: () => {
       return db.deleteDocument($id);
     },
     onSuccess: () => {
-      console.log("Deleted");
       navigate("/blogs", { state: { invalidate: true } });
     },
     onError: () => {
