@@ -32,12 +32,13 @@ function Login() {
   function handleNavigateSignUp() {
     navigate("/signup", {
       state: { origin: "login", from: from ?? null },
+      replace: true,
     });
   }
 
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
-      navigate("/");
+      navigate(-1);
     }
   }
 
@@ -150,7 +151,7 @@ function Login() {
           </span>
         </p>
         <div className="absolute -top-8 -right-3 bg-black rounded-full">
-          <Link to={"/"}>
+          <Link to={-1}>
             <FaTimesCircle size={30} />
           </Link>
         </div>

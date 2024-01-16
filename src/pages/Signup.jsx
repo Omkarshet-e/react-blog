@@ -33,11 +33,12 @@ function Signup() {
   function handleNavigateLogin() {
     navigate("/login", {
       state: { origin: "signup", from: from ?? null },
+      replace: true,
     });
   }
   function handleNavigateRoot(e) {
     if (e.target.id === "overlay") {
-      navigate("/");
+      navigate(-1);
     }
   }
   const loginMutation = useMutation({
@@ -195,7 +196,7 @@ function Signup() {
           </span>
         </p>
         <div className="absolute -top-8 -right-3 bg-black rounded-full">
-          <Link to={"/"}>
+          <Link to={-1}>
             <FaTimesCircle size={30} />
           </Link>
         </div>
