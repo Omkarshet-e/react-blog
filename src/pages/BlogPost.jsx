@@ -35,12 +35,6 @@ function BlogPost() {
     setLoading(false);
   }, [img]);
 
-  useEffect(() => {
-    if (userData.userId === userId) {
-      setOwner(true);
-    }
-  }, [userData, userId]);
-
   const { isError, isFetching, data } = useQuery({
     queryKey: ["getBlog"],
     queryFn: getBlogPost,
@@ -83,6 +77,12 @@ function BlogPost() {
     document.title = title ?? data?.title ?? "React Blog";
     return () => (document.title = "React Blog");
   }, [title, data]);
+
+  useEffect(() => {
+    if (userData.userId === userId || userData.userId === data?.userId) {
+      setOwner(true);
+    }
+  }, [userData, userId, data]);
 
   if (loading) {
     return <Loading />;

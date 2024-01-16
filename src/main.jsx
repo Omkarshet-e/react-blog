@@ -36,11 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "blogs",
-        element: (
-          <AuthLayout>
-            <AllBlogs />
-          </AuthLayout>
-        ),
+        element: <AllBlogs />,
       },
       {
         path: "blog/:id",
