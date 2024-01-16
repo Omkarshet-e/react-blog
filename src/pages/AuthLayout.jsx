@@ -13,7 +13,6 @@ function AuthLayout({ children }) {
   const state = useLocation();
 
   useEffect(() => {
-    console.log(state);
     if (!auth) {
       navigate("/signup", { state: { from: state.pathname }, replace: true });
     } else {
